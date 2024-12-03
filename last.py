@@ -175,25 +175,25 @@ before_buttons_frame = tk.Frame(content_frame, bg="#A9C4E2")
 before_buttons_frame.grid(row=2, column=0, pady=10)  # Place below "Before" canvas
 
 upload_button = ttk.Button(
-    before_buttons_frame, text="Upload", command=upload_image, style="Rounded.TButton"
+    before_buttons_frame, text="Upload ⬆", command=upload_image, style="Rounded.TButton"
 )
 upload_button.grid(row=0, column=0, padx=5 )
 
 apply_button = ttk.Button(
     before_buttons_frame,
-    text="Apply",
+    text="Apply ✔",
     command=apply_processing,
     style="Rounded.TButton",
 )
 apply_button.grid(row=0, column=1, padx=5)
 
 reset_button = ttk.Button(
-    before_buttons_frame, text="Reset", command=reset_images, style="Rounded.TButton"
+    before_buttons_frame, text="Reset ⟳", command=reset_images, style="Rounded.TButton"
 )
 reset_button.grid(row=1, column=0, padx=5)
 
 save_button = ttk.Button(
-    before_buttons_frame, text="Save", command=save_image, style="Rounded.TButton"
+    before_buttons_frame, text="Save ⬇", command=save_image, style="Rounded.TButton"
 )
 save_button.grid(row=1, column=1, padx=5)
 
