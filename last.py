@@ -181,7 +181,7 @@ upload_button.grid(row=0, column=0, padx=5 )
 
 apply_button = ttk.Button(
     before_buttons_frame,
-    text="Apply ✔",
+    text="Apply",
     command=apply_processing,
     style="Rounded.TButton",
 )
@@ -193,7 +193,7 @@ reset_button = ttk.Button(
 reset_button.grid(row=1, column=0, padx=5)
 
 save_button = ttk.Button(
-    before_buttons_frame, text="Save ⬇", command=save_image, style="Rounded.TButton"
+    before_buttons_frame, text="Save", command=save_image, style="Rounded.TButton"
 )
 save_button.grid(row=1, column=1, padx=5)
 
