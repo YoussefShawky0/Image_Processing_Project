@@ -4,14 +4,14 @@ from PIL import Image, ImageTk
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
-
+import os
 
 
 original_image = None
 processed_image = None
 
 
-def upload_image(before_canvas , histogram_canvas):
+def upload_image(before_canvas, histogram_canvas):
     global original_image, processed_image
     file_path = filedialog.askopenfilename(
         filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")]
@@ -34,8 +34,9 @@ def display_image(img, canvas):
         canvas_width // 2, canvas_height // 2, image=photo, anchor=tk.CENTER
     )
     canvas.image = photo  # Keep reference to avoid garbage collection
-    
-def apply_processing(filter_combobox,after_canvas,histogram_canvas):
+
+
+def apply_processing(filter_combobox, after_canvas, histogram_canvas):
     global processed_image
     if not original_image or filter_combobox.get() == "Select Filter":
         messagebox.showerror("Error", "Please upload an image and select a filter.")
@@ -45,11 +46,11 @@ def apply_processing(filter_combobox,after_canvas,histogram_canvas):
     np_image = np.array(original_image)
 
     if filter_type == "Median Filter":
-        processed_np = cv2.medianBlur(np_image, 5)  # Kernel size 5
+        processed_np = cv2.medianBlur(np_image, 9)  # Kernel size 9
     elif filter_type == "Averaging Filter":
-        processed_np = cv2.blur(np_image, (5, 5))  # Kernel size 5x5
+        processed_np = cv2.blur(np_image, (3, 3))  # Kernel size 9x9
     elif filter_type == "Low-pass Filters":
-        processed_np = cv2.GaussianBlur(np_image, (5, 5), 0)  # Gaussian Blur
+        processed_np = cv2.GaussianBlur(np_image, (9, 9), 0)  # Gaussian Blur with kernel size 9x9
     else:
         return
 
@@ -58,15 +59,16 @@ def apply_processing(filter_combobox,after_canvas,histogram_canvas):
     plot_histogram(processed_image, histogram_canvas)
 
 
-def reset_images( before_canvas,after_canvas , histogram_canvas):
-    if original_image:
-        display_image(original_image, before_canvas)
-        display_image(original_image, after_canvas)
-        reset_histogram(histogram_canvas)
+def reset_images(before_canvas, after_canvas, histogram_canvas):
+    before_canvas.delete("all")
+    after_canvas.delete("all")
+    reset_histogram(histogram_canvas)
 
 
 def reset_histogram(histogram_canvas):
     histogram_canvas.delete("all")
+    if os.path.exists("histogram.png"):
+        os.remove("histogram.png")
 
 
 def plot_histogram(img, histogram_canvas):
