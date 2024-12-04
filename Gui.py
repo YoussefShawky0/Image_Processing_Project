@@ -76,7 +76,7 @@ before_buttons_frame = tk.Frame(content_frame, bg="#CBDCEB")
 before_buttons_frame.grid(row=2, column=0, pady=10)  # Place below "Before" canvas
 
 upload_button = ttk.Button(
-    before_buttons_frame, text="Upload ⬆", command=lambda: upload_image(before_canvas), style="Rounded.TButton",
+    before_buttons_frame, text="Upload ⬆", command=lambda: upload_image(before_canvas ,histogram_canvas), style="Rounded.TButton",
 )
 upload_button.grid(row=0, column=0, padx=5 )
 
@@ -89,7 +89,7 @@ apply_button = ttk.Button(
 apply_button.grid(row=0, column=1, padx=5)
 
 reset_button = ttk.Button(
-    before_buttons_frame, text="Reset ⟳", command=lambda: reset_images(before_canvas,after_canvas), style="Rounded.TButton"
+    before_buttons_frame, text="Reset ⟳", command=lambda: reset_images(before_canvas,after_canvas , histogram_canvas), style="Rounded.TButton"
 )
 reset_button.grid(row=1, column=0, padx=5)
 
@@ -97,7 +97,6 @@ save_button = ttk.Button(
     before_buttons_frame, text="Save", command=save_image, style="Rounded.TButton"
 )
 save_button.grid(row=1, column=1, padx=5)
-
 filter_combobox = ttk.Combobox(
     before_buttons_frame,
     values=["Median Filter", "Averaging Filter", "Low-pass Filters"],

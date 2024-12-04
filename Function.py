@@ -11,7 +11,7 @@ original_image = None
 processed_image = None
 
 
-def upload_image(before_canvas):
+def upload_image(before_canvas , histogram_canvas):
     global original_image, processed_image
     file_path = filedialog.askopenfilename(
         filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")]
@@ -22,7 +22,7 @@ def upload_image(before_canvas):
         )  # Convert to RGB to handle transparency
         processed_image = original_image.copy()
         display_image(original_image, before_canvas)
-        reset_histogram()
+        reset_histogram(histogram_canvas)
 
 
 def display_image(img, canvas):
@@ -58,11 +58,11 @@ def apply_processing(filter_combobox,after_canvas):
     plot_histogram(processed_image)
 
 
-def reset_images( before_canvas,after_canvas):
+def reset_images( before_canvas,after_canvas , histogram_canvas):
     if original_image:
         display_image(original_image, before_canvas)
         display_image(original_image, after_canvas)
-        reset_histogram()
+        reset_histogram(histogram_canvas)
 
 
 def reset_histogram(histogram_canvas):
