@@ -35,7 +35,7 @@ def display_image(img, canvas):
     )
     canvas.image = photo  # Keep reference to avoid garbage collection
     
-def apply_processing(filter_combobox,after_canvas):
+def apply_processing(filter_combobox,after_canvas,histogram_canvas):
     global processed_image
     if not original_image or filter_combobox.get() == "Select Filter":
         messagebox.showerror("Error", "Please upload an image and select a filter.")
@@ -55,7 +55,7 @@ def apply_processing(filter_combobox,after_canvas):
 
     processed_image = Image.fromarray(processed_np)
     display_image(processed_image, after_canvas)
-    plot_histogram(processed_image)
+    plot_histogram(processed_image, histogram_canvas)
 
 
 def reset_images( before_canvas,after_canvas , histogram_canvas):

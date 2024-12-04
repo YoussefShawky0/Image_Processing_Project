@@ -83,7 +83,7 @@ upload_button.grid(row=0, column=0, padx=5 )
 apply_button = ttk.Button(
     before_buttons_frame,
     text="Apply",
-    command=apply_processing,
+    command=lambda: apply_processing(filter_combobox,after_canvas,histogram_canvas),
     style="Rounded.TButton",
 )
 apply_button.grid(row=0, column=1, padx=5)
