@@ -50,7 +50,9 @@ def apply_processing(filter_combobox, after_canvas, histogram_canvas):
     elif filter_type == "Averaging Filter":
         processed_np = cv2.blur(np_image, (3, 3))  # Kernel size 9x9
     elif filter_type == "Low-pass Filters":
-        processed_np = cv2.GaussianBlur(np_image, (9, 9), 0)  # Gaussian Blur with kernel size 9x9
+        processed_np = cv2.GaussianBlur(
+            np_image, (9, 9), 0
+        )  # Gaussian Blur with kernel size 9x9
     elif filter_type == "Canney Edge Detection":
         processed_np = cv2.Canny(np_image, 100, 200)  # Canny Edge Detection
     else:
