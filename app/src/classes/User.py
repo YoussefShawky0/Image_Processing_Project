@@ -1,7 +1,7 @@
 from Person import Person, Gender
 
 class User(Person):
-    def __init__(self,person_id: int, name: str, phone_number: str, gender: Gender, user_id: int, address: str):
+    def __init__(self,person_id: int, name: str, phone_number: str, gender: Gender, user_id: int, address: str,required = True):
         super().__init__(person_id, name, phone_number,gender)
         
         self.__user_id = user_id

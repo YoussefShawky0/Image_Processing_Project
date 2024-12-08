@@ -3,7 +3,6 @@ from enum import Enum
 class Gender(Enum):
     Male = "Male"
     Female = "Female"
-    Other = "Other"
 
 class Person:
     def __init__(self,person_id: int,name: str,phone_number: str, gender = Gender,required = True):
@@ -24,10 +23,10 @@ class Person:
     
     
     
-p1 = Person(person_id=1,name="John",phone_number="1234567890")
 
 # test:
 # vvvv
+# p1 = Person(person_id=1,name="John",phone_number="1234567890")
 # print(p1.get_person_id())
 # print(p1.get_name())
 # print(p1.get_contactInfo())
