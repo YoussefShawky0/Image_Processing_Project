@@ -21,7 +21,7 @@ class LoginPage:
         left_frame = create_left_panel(
             login_page,
             "Welcome Back",
-            "./assets/register.png",
+            "app/assets/register.png",
             "Secure and easy banking experience.\nRegister now to explore more features.",
         )
 
