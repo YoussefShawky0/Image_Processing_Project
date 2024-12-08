@@ -1,5 +1,4 @@
 class Bank:
-           
     def __init__(self, name, address, hot_line):
         self.__name__ = name
         self.__address__ = address
@@ -18,7 +17,7 @@ class Bank:
         return self.__number_of_users__
 
     def inc_user(self):
-        self.__number_of_users__ += 1 
+        self.__number_of_users__ += 1
 
     def dec_user(self):
         if self.__number_of_users__ > 0:
