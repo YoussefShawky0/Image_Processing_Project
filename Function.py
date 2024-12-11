@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from PIL import Image, ImageTk
@@ -7,6 +8,7 @@ import cv2
 import os
 from periodic_filter import remove_periodic_noise
 from rgb_to_gray import rgb2gray
+from utilities import apply_periodic_filter
 
 original_image = None
 processed_image = None
@@ -34,7 +36,7 @@ def display_image(img, canvas):
     )
     canvas.image = photo  # Keep reference to avoid garbage collection
 
-def apply_processing(filter_combobox, after_canvas, histogram_canvas):
+def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_types):
     global processed_image, file_path
     if not original_image or filter_combobox.get() == "Select Filter":
         messagebox.showerror("Error", "Please upload an image and select a filter.")
@@ -53,7 +55,9 @@ def apply_processing(filter_combobox, after_canvas, histogram_canvas):
     elif filter_type == "Canney Edge Detection":
         processed_np = cv2.Canny(np_image, 100, 200)  # Canny Edge Detection
     elif filter_type == "Periodic noise Filter":
-        processed_np = remove_periodic_noise(file_path, 1)
+        filter_type = periodic_types.get()
+        periodic_type_code = apply_periodic_filter(filter_type)
+        processed_np = remove_periodic_noise(file_path, periodic_type_code)
     elif filter_type == "RGB to Grayscale":
         processed_np = rgb2gray(np_image, file_path)
     else:
@@ -109,3 +113,5 @@ def save_image():
                 messagebox.showinfo("Saved", f"Image saved successfully at {file_path}")
             except Exception as e:
                 messagebox.showerror("Save Error", f"Could not save image: {e}")
+
+

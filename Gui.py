@@ -1,5 +1,7 @@
-from Function import *
 
+import tkinter as tk
+from tkinter import ttk
+from Function import apply_processing, reset_images, save_image, upload_image
 
 # Gui
 root = tk.Tk()
@@ -111,7 +113,7 @@ upload_button.grid(row=0, column=0, padx=5)
 apply_button = ttk.Button(
     before_buttons_frame,
     text="Apply",
-    command=lambda: apply_processing(filter_combobox, after_canvas, histogram_canvas),
+    command=lambda: apply_processing(filter_combobox, after_canvas, histogram_canvas,periodic_types),
     style="Rounded.TButton",
 )
 apply_button.grid(row=0, column=1, padx=5)
@@ -125,14 +127,16 @@ reset_button = ttk.Button(
 reset_button.grid(row=1, column=0, padx=5)
 
 save_button = ttk.Button(
-    before_buttons_frame, text="Save", command=save_image, style="Rounded.TButton"
+    before_buttons_frame, text="Save", command= save_image(), style="Rounded.TButton"
 )
 save_button.grid(row=1, column=1, padx=5)
+
+
 filter_combobox = ttk.Combobox(
     before_buttons_frame,
     values=[
         "Median Filter",
-        "Averaging Filter", 
+        "Averaging Filter",
         "Low-pass Filters",
         "Canney Edge Detection",
         
@@ -151,6 +155,38 @@ filter_combobox = ttk.Combobox(
 )  # Make combobox read-only
 filter_combobox.set("Select Filter ▼")
 filter_combobox.grid(row=0, column=2, pady=5)
+
+
+
+
+
+
+
+periodic_types = ttk.Combobox(
+    before_buttons_frame,
+    values=[
+        "vertical noise",
+        "horizontal noise",
+        "right diagonal noise",
+        "left diagonal noise",
+    ],
+    state="readonly",
+    width=18,
+    justify="center",
+    style="Rounded.TButton",
+    font=("calibri", 10, "bold"),
+)  # Make combobox read-only
+periodic_types.set("Periodic Type ▼")
+periodic_types.grid(row=1, column=2, pady=5)
+periodic_types.grid_remove()  # Hide initially
+
+def show_periodic_types(event):
+    if filter_combobox.get() == "Periodic noise Filter":
+        periodic_types.grid()
+    else:
+        periodic_types.grid_remove()
+
+filter_combobox.bind("<<ComboboxSelected>>", show_periodic_types)
 
 # Run App
 root.mainloop()
