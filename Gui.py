@@ -132,10 +132,16 @@ filter_combobox = ttk.Combobox(
     before_buttons_frame,
     values=[
         "Median Filter",
-        "Averaging Filter",
+        "Averaging Filter", 
         "Low-pass Filters",
         "Canney Edge Detection",
-        "K-Means Clustering",
+        
+        "RGB to Grayscale",
+
+        # "K-Means Clustering",
+        "Periodic noise Filter",
+        
+
     ],
     state="readonly",
     width=18,
