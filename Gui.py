@@ -156,12 +156,6 @@ filter_combobox = ttk.Combobox(
 filter_combobox.set("Select Filter ▼")
 filter_combobox.grid(row=0, column=2, pady=5)
 
-
-
-
-
-
-
 periodic_types = ttk.Combobox(
     before_buttons_frame,
     values=[

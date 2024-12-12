@@ -1,6 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 
 
 def rgb2gray(rgb, file_path):
