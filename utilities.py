@@ -48,7 +48,6 @@ def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_t
     filter_type = filter_combobox.get()
     np_image = np.array(original_image)
 
-    cv2.
     if filter_type == "Median Filter":
         gray_np = cv2.cvtColor(np_image, cv2.COLOR_RGB2GRAY)
         processed_np = cv2.medianBlur(gray_np, 3)  # Kernel size 3x3
