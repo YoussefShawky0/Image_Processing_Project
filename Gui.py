@@ -163,8 +163,6 @@ periodic_types = ttk.Combobox(
     values=[
         "vertical noise",
         "horizontal noise",
-        "right diagonal noise",
-        "left diagonal noise",
     ],
     state="readonly",
     width=18,

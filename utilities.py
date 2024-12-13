@@ -52,7 +52,7 @@ def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_t
         gray_np = cv2.cvtColor(np_image, cv2.COLOR_RGB2GRAY)
         processed_np = cv2.medianBlur(gray_np, 3)  # Kernel size 3x3
     elif filter_type == "Averaging Filter":
-        processed_np = cv2.blur(np_image, (1, 1))  # Kernel size 9x9
+        processed_np = cv2.blur(np_image, (4,4)) # Kernel size 9x9
     elif filter_type == "Low-pass Filters":
         processed_np = cv2.GaussianBlur(
             np_image, (9, 9), 0
@@ -129,10 +129,6 @@ def apply_periodic_filter(filter_type):
         return 1
     elif filter_type == "horizontal noise":
         return 2
-    elif filter_type == "right diagonal noise":
-        return 3
-    elif filter_type == "left diagonal noise":
-        return 4
     else:
         return 0
 
@@ -154,15 +150,7 @@ def remove_periodic_noise(img_path: str, filter_type: int):
         # vertical mask
         center_shift[: crow - 10, ccol - 4 : ccol + 4] = 1
         center_shift[crow + 10 :, ccol - 4 : ccol + 4] = 1
-    elif filter_type == 3:  # right diagonal noise
-        # left diagonal mask
-        center_shift[: crow - 10, : ccol - 10] = 1
-        center_shift[crow + 10 :, ccol + 10 :] = 1
-    elif filter_type == 4:  # left diagonal noise
-        # right diagonal mask
-        center_shift[: crow - 10, ccol + 10 :] = 1
-        center_shift[crow + 10 :, : ccol - 10] = 1
-
+    
     f_shift = np.fft.ifftshift(center_shift)
     denoised_image = np.fft.ifft2(f_shift)
     denoised_image = np.real(denoised_image)
