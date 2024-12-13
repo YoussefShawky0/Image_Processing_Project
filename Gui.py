@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-
 from utilities import *
 from kmeans import KMeansClusteringApp
 
