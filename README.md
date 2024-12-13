@@ -1,2 +1,1 @@
-# advanced-python
-projects
+# Digital Image Processing 
