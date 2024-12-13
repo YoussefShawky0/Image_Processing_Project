@@ -35,7 +35,8 @@ This project provides functionality to enhance or transform images through vario
 
 - **Description**: Reduces noise by replacing each pixel value with the median value of its neighbors. Useful for **noise reduction**, particularly salt-and-pepper noise.
     
-    ![Screenshot 2024-12-11 212554.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e8285488-d80f-4e5b-989e-cc8219b95a3e/1eb69179-ba6c-4d98-93e9-5d579a15f4e7/Screenshot_2024-12-11_212554.png)
+   ![image](https://github.com/user-attachments/assets/ff1c35ad-a3c8-47f3-9155-8de90e1b5a1a)
+
     
 
 ### 2. **Averaging Filter**
