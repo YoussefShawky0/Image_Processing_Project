@@ -48,11 +48,12 @@ def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_t
     filter_type = filter_combobox.get()
     np_image = np.array(original_image)
 
+    cv2.
     if filter_type == "Median Filter":
         gray_np = cv2.cvtColor(np_image, cv2.COLOR_RGB2GRAY)
         processed_np = cv2.medianBlur(gray_np, 3)  # Kernel size 3x3
     elif filter_type == "Averaging Filter":
-        processed_np = cv2.blur(np_image, (9, 9))  # Kernel size 9x9
+        processed_np = cv2.blur(np_image, (1, 1))  # Kernel size 9x9
     elif filter_type == "Low-pass Filters":
         processed_np = cv2.GaussianBlur(
             np_image, (9, 9), 0
@@ -155,19 +156,13 @@ def remove_periodic_noise(img_path: str, filter_type: int):
         center_shift[: crow - 10, ccol - 4 : ccol + 4] = 1
         center_shift[crow + 10 :, ccol - 4 : ccol + 4] = 1
     elif filter_type == 3:  # right diagonal noise
-        # diagonal-1 mask
-        for x in range(0, rows):
-            for y in range(0, cols):
-                if x == y:
-                    for i in range(0, 10):
-                        center_shift[x - i, y] = 1
+        # left diagonal mask
+        center_shift[: crow - 10, : ccol - 10] = 1
+        center_shift[crow + 10 :, ccol + 10 :] = 1
     elif filter_type == 4:  # left diagonal noise
-        # diagonal-2 mask
-        for x in range(0, rows):
-            for y in range(0, cols):
-                if x + y == cols:
-                    for i in range(0, 10):
-                        center_shift[x - i, y] = 1
+        # right diagonal mask
+        center_shift[: crow - 10, ccol + 10 :] = 1
+        center_shift[crow + 10 :, : ccol - 10] = 1
 
     f_shift = np.fft.ifftshift(center_shift)
     denoised_image = np.fft.ifft2(f_shift)
