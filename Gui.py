@@ -197,13 +197,18 @@ def show_periodic_types(event):
     else:
         periodic_types.grid_remove()
 
+
 def show_kmeans_view(event):
     if filter_combobox.get() == "K-Means Clustering":
         kmeans_apply_button.grid()
     else:
         kmeans_apply_button.grid_remove()
 
-filter_combobox.bind("<<ComboboxSelected>>", lambda e: (show_periodic_types(e), show_kmeans_view(e)))
+
+filter_combobox.bind(
+    "<<ComboboxSelected>>", lambda e: (show_periodic_types(e), show_kmeans_view(e))
+)
+
 
 def apply_kmeans():
     try:

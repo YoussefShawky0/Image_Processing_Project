@@ -12,6 +12,7 @@ original_image = None
 processed_image = None
 file_path = None
 
+
 def upload_image(before_canvas, histogram_canvas):
     global original_image, processed_image, file_path
 
@@ -26,6 +27,7 @@ def upload_image(before_canvas, histogram_canvas):
         display_image(original_image, before_canvas)
         reset_histogram(histogram_canvas)
 
+
 def display_image(img, canvas):
     """Display an image on a canvas."""
     canvas_width, canvas_height = 350, 350
@@ -35,6 +37,7 @@ def display_image(img, canvas):
         canvas_width // 2, canvas_height // 2, image=photo, anchor=tk.CENTER
     )
     canvas.image = photo  # Keep reference to avoid garbage collection
+
 
 def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_types):
     global processed_image, file_path
@@ -69,15 +72,18 @@ def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_t
     display_image(processed_image, after_canvas)
     plot_histogram(processed_image, histogram_canvas)
 
+
 def reset_images(before_canvas, after_canvas, histogram_canvas):
     before_canvas.delete("all")
     after_canvas.delete("all")
     reset_histogram(histogram_canvas)
 
+
 def reset_histogram(histogram_canvas):
     histogram_canvas.delete("all")
     if os.path.exists("histogram.png"):
         os.remove("histogram.png")
+
 
 def plot_histogram(img, histogram_canvas):
     """Plot histogram of an image."""
@@ -93,6 +99,7 @@ def plot_histogram(img, histogram_canvas):
 
     hist_img = Image.open("histogram.png")
     display_image(hist_img, histogram_canvas)
+
 
 def save_image():
     if processed_image:
@@ -116,6 +123,7 @@ def save_image():
             except Exception as e:
                 messagebox.showerror("Save Error", f"Could not save image: {e}")
 
+
 def apply_periodic_filter(filter_type):
     if filter_type == "vertical noise":
         return 1
@@ -127,6 +135,7 @@ def apply_periodic_filter(filter_type):
         return 4
     else:
         return 0
+
 
 def remove_periodic_noise(img_path: str, filter_type: int):
     img = cv.imread(img_path, cv.IMREAD_GRAYSCALE)  # read image in grayscale
@@ -165,6 +174,7 @@ def remove_periodic_noise(img_path: str, filter_type: int):
     denoised_image = np.real(denoised_image)
     denoised_image = np.clip(denoised_image, 0, 255).astype(np.uint8)
     return denoised_image
+
 
 def rgb2gray(rgb, file_path):
     return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.1140])
