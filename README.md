@@ -43,35 +43,39 @@ This project provides functionality to enhance or transform images through vario
 
 - **Description**: Smoothens the image by averaging pixel values in a kernel. Effective for **blurring** and reducing random noise.
     
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e8285488-d80f-4e5b-989e-cc8219b95a3e/873ef0c0-e81b-4586-bf52-e2ac0cd68d96/image.png)
+  ![image](https://github.com/user-attachments/assets/ee9fce61-0972-4b81-a143-10a60a484dc9)
     
 
 ### 3. **Low-Pass Filters**
 
 - **Description**: Removes high-frequency noise while preserving low-frequency details. Ideal for **noise suppression** and overall smoothing.
     
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e8285488-d80f-4e5b-989e-cc8219b95a3e/dc7b9be1-36d7-4f37-b2fa-f4af6f3d82bd/image.png)
+   ![image](https://github.com/user-attachments/assets/f486bf6e-7b39-4b14-8857-00dcb4d36111)
+
     
 
 ### 4. **Canny Edge Detection**
 
 - **Description**: Detects edges in an image by finding areas of rapid intensity change. Suitable for **edge detection** tasks.
     
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e8285488-d80f-4e5b-989e-cc8219b95a3e/49a15937-176f-4e41-bb68-5c2d1c29fa60/image.png)
+   ![image](https://github.com/user-attachments/assets/ee1d4b77-1749-42a2-a721-09a763a7d072)
+
     
 
 ### 5. **Periodic Noise Filter**
 
 - **Description**: Removes periodic noise patterns from the image. Useful for **noise reduction** in images with repeating patterns of distortion.
     
-    ![Screenshot 2024-12-11 202836.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e8285488-d80f-4e5b-989e-cc8219b95a3e/4a77c4ce-d7f7-4c89-8312-884980a3a983/Screenshot_2024-12-11_202836.png)
+   ![image](https://github.com/user-attachments/assets/46d1c74c-5550-4878-a035-ebb4f6f7f59e)
+
     
 
 ### 6. **RGB to Grayscale**
 
 - **Description**: Converts the image from RGB color space to grayscale. Often used for simplifying images by reducing them to **intensity-based representations**.
     
-    ![Screenshot 2024-12-13 163944.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/e8285488-d80f-4e5b-989e-cc8219b95a3e/9bf1d1e9-4c9d-46bb-8cd8-e5d0970aa2b5/Screenshot_2024-12-13_163944.png)
+   ![image](https://github.com/user-attachments/assets/f3d6a9c1-036d-4247-9922-71f86714d9e7)
+
     
 
 ---
@@ -82,7 +86,8 @@ This project provides functionality to enhance or transform images through vario
 
 - **Description**: Groups similar pixel values into clusters to simplify and segment images. In this project, it is designed to work with datasets consisting of numbers between 0 and 9, and the algorithm is responsible for **predicting the numbers** based on clustering.
     
-    ![kmeans.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/e8285488-d80f-4e5b-989e-cc8219b95a3e/6b639113-2d8c-436c-956a-c88186f6c420/kmeans.jpg)
+    ![image](https://github.com/user-attachments/assets/3665cbfc-7b2e-430d-849d-079850bc21b3)
+
     
 
 ---
