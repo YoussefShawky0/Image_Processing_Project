@@ -1,7 +1,9 @@
-
 import tkinter as tk
 from tkinter import ttk
-from Function import apply_processing, reset_images, save_image, upload_image
+from tkinter import messagebox
+
+from utilities import *
+from kmeans import KMeansClusteringApp
 
 # Gui
 root = tk.Tk()
@@ -56,6 +58,7 @@ histogram_canvas = tk.Canvas(
     border=0,
 )
 histogram_canvas.grid(row=1, column=2, padx=5, pady=10)
+
 # Labels
 before_label = tk.Label(
     content_frame,
@@ -97,13 +100,12 @@ style.map(
     relief=[("pressed", "sunken")],
 )
 
-
 # Buttons and Dropdown
-before_buttons_frame = tk.Frame(content_frame, bg="#CBDCEB")
-before_buttons_frame.grid(row=2, column=0, pady=10)  # Place below "Before" canvas
+buttons_frame = tk.Frame(content_frame, bg="#CBDCEB")
+buttons_frame.grid(row=2, column=0, columnspan=1, pady=10)
 
 upload_button = ttk.Button(
-    before_buttons_frame,
+    buttons_frame,
     text="Upload ⬆",
     command=lambda: upload_image(before_canvas, histogram_canvas),
     style="Rounded.TButton",
@@ -111,15 +113,17 @@ upload_button = ttk.Button(
 upload_button.grid(row=0, column=0, padx=5)
 
 apply_button = ttk.Button(
-    before_buttons_frame,
+    buttons_frame,
     text="Apply",
-    command=lambda: apply_processing(filter_combobox, after_canvas, histogram_canvas,periodic_types),
+    command=lambda: apply_processing(
+        filter_combobox, after_canvas, histogram_canvas, periodic_types
+    ),
     style="Rounded.TButton",
 )
 apply_button.grid(row=0, column=1, padx=5)
 
 reset_button = ttk.Button(
-    before_buttons_frame,
+    buttons_frame,
     text="Reset ⟳",
     command=lambda: reset_images(before_canvas, after_canvas, histogram_canvas),
     style="Rounded.TButton",
@@ -127,25 +131,23 @@ reset_button = ttk.Button(
 reset_button.grid(row=1, column=0, padx=5)
 
 save_button = ttk.Button(
-    before_buttons_frame, text="Save", command= save_image(), style="Rounded.TButton"
+    buttons_frame,
+    text="Save",
+    command=save_image,
+    style="Rounded.TButton",
 )
 save_button.grid(row=1, column=1, padx=5)
 
-
 filter_combobox = ttk.Combobox(
-    before_buttons_frame,
+    buttons_frame,
     values=[
         "Median Filter",
         "Averaging Filter",
         "Low-pass Filters",
         "Canney Edge Detection",
-        
         "RGB to Grayscale",
-
-        # "K-Means Clustering",
+        "K-Means Clustering",
         "Periodic noise Filter",
-        
-
     ],
     state="readonly",
     width=18,
@@ -153,11 +155,12 @@ filter_combobox = ttk.Combobox(
     style="Rounded.TButton",
     font=("calibri", 10, "bold"),
 )  # Make combobox read-only
+
 filter_combobox.set("Select Filter ▼")
 filter_combobox.grid(row=0, column=2, pady=5)
 
 periodic_types = ttk.Combobox(
-    before_buttons_frame,
+    buttons_frame,
     values=[
         "vertical noise",
         "horizontal noise",
@@ -170,9 +173,23 @@ periodic_types = ttk.Combobox(
     style="Rounded.TButton",
     font=("calibri", 10, "bold"),
 )  # Make combobox read-only
+
 periodic_types.set("Periodic Type ▼")
 periodic_types.grid(row=1, column=2, pady=5)
 periodic_types.grid_remove()  # Hide initially
+
+
+kmeans_apply_button = ttk.Button(
+    buttons_frame,
+    text="Apply K-Means",
+    command=lambda: apply_kmeans(),
+    style="Rounded.TButton",
+)
+kmeans_apply_button.grid(row=1, column=2, pady=5)
+
+# Initially hide the kmeans content
+kmeans_apply_button.grid_remove()
+
 
 def show_periodic_types(event):
     if filter_combobox.get() == "Periodic noise Filter":
@@ -180,7 +197,20 @@ def show_periodic_types(event):
     else:
         periodic_types.grid_remove()
 
-filter_combobox.bind("<<ComboboxSelected>>", show_periodic_types)
+def show_kmeans_view(event):
+    if filter_combobox.get() == "K-Means Clustering":
+        kmeans_apply_button.grid()
+    else:
+        kmeans_apply_button.grid_remove()
+
+filter_combobox.bind("<<ComboboxSelected>>", lambda e: (show_periodic_types(e), show_kmeans_view(e)))
+
+def apply_kmeans():
+    try:
+        kmeans_app = KMeansClusteringApp()
+    except Exception as e:
+        messagebox.showerror("Error", f"An error occurred: {str(e)}")
+
 
 # Run App
 root.mainloop()
