@@ -51,7 +51,7 @@ def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_t
         gray_np = cv2.cvtColor(np_image, cv2.COLOR_RGB2GRAY)
         processed_np = cv2.medianBlur(gray_np, 3)  # Kernel size 3x3
     elif filter_type == "Averaging Filter":
-        processed_np = cv2.blur(np_image, (4,4)) # Kernel size 9x9
+        processed_np = cv2.blur(np_image, (4,4)) # Kernel size 4x4
     elif filter_type == "Low-pass Filters":
         processed_np = cv2.GaussianBlur(
             np_image, (9, 9), 0
@@ -92,7 +92,7 @@ def plot_histogram(img, histogram_canvas):
     plt.title("Histogram")
     plt.xlabel("Pixel Intensity")
     plt.ylabel("Frequency")
-    plt.tight_layout()
+    plt.tight_layout() # Ensure the plot fits within the canvas
     plt.savefig("histogram.png", dpi=100)
     plt.close()
 
