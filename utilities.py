@@ -22,26 +22,25 @@ def upload_image(before_canvas, histogram_canvas):
     if file_path:
         original_image = Image.open(file_path).convert(
             "RGB"
-        )  # Convert to RGB to handle transparency
+        )  # Ensure that the input image is in the RGB color mode so that it can be processed correctly
         processed_image = original_image.copy()
         display_image(original_image, before_canvas)
         reset_histogram(histogram_canvas)
 
 
 def display_image(img, canvas):
-    """Display an image on a canvas."""
     canvas_width, canvas_height = 350, 350
-    img = img.resize((canvas_width, canvas_height), Image.LANCZOS)
+    img = img.resize((canvas_width, canvas_height), Image.LANCZOS)  # Resize image
     photo = ImageTk.PhotoImage(img)
     canvas.create_image(
-        canvas_width // 2, canvas_height // 2, image=photo, anchor=tk.CENTER
+        canvas_width // 2, canvas_height // 2, image=photo, anchor=tk.CENTER # Center the image on the canvas
     )
     canvas.image = photo  # Keep reference to avoid garbage collection
 
 
 def apply_processing(filter_combobox, after_canvas, histogram_canvas, periodic_types):
     global processed_image, file_path
-    if not original_image or filter_combobox.get() == "Select Filter":
+    if not original_image or filter_combobox.get() == "Select Filter ▼":
         messagebox.showerror("Error", "Please upload an image and select a filter.")
         return
 
@@ -167,4 +166,3 @@ def apply_kmeans():
         kmeans_app = KMeansClusteringApp()
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
-
