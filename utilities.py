@@ -2,11 +2,11 @@ import cv2
 import os
 import cv2 as cv
 import numpy as np
-import pandas as pd
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
+from kmeans import KMeansClusteringApp
 
 original_image = None
 processed_image = None
@@ -160,3 +160,11 @@ def remove_periodic_noise(img_path: str, filter_type: int):
 
 def rgb2gray(rgb, file_path):
     return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.1140])
+
+
+def apply_kmeans():
+    try:
+        kmeans_app = KMeansClusteringApp()
+    except Exception as e:
+        messagebox.showerror("Error", f"An error occurred: {str(e)}")
+

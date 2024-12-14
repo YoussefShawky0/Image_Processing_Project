@@ -2,16 +2,15 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from utilities import *
-from kmeans import KMeansClusteringApp
+
 
 # Gui
 root = tk.Tk()
 root.title("Noise Reduction and K-Means Clustering APP")
-
 root.geometry("1150x600")
-root.configure(bg="#CBDCEB")  # Background color
+root.configure(bg="#CBDCEB")
 
-# Header
+# Header Frame and Label
 header_frame = tk.Frame(root, bg="#133E87", height=50)
 header_frame.pack(fill=tk.X)
 header_label = tk.Label(
@@ -27,6 +26,7 @@ header_label.pack(pady=10)
 content_frame = tk.Frame(root, bg="#CBDCEB")
 content_frame.pack()
 
+# before image
 before_canvas = tk.Canvas(
     content_frame,
     width=350,
@@ -37,6 +37,8 @@ before_canvas = tk.Canvas(
     border=0,
 )
 before_canvas.grid(row=1, column=0, padx=5, pady=10)
+
+# after image
 after_canvas = tk.Canvas(
     content_frame,
     width=350,
@@ -47,6 +49,8 @@ after_canvas = tk.Canvas(
     border=0,
 )
 after_canvas.grid(row=1, column=1, padx=5, pady=10)
+
+# histogram
 histogram_canvas = tk.Canvas(
     content_frame,
     width=350,
@@ -67,6 +71,7 @@ before_label = tk.Label(
     foreground="#133E87",
 )
 before_label.grid(row=0, column=0, pady=5)
+
 after_label = tk.Label(
     content_frame,
     text="After",
@@ -75,6 +80,7 @@ after_label = tk.Label(
     font=("calibri", 20, "bold"),
 )
 after_label.grid(row=0, column=1, pady=5)
+
 histogram_label = tk.Label(
     content_frame,
     text="Histogram",
@@ -93,6 +99,7 @@ style.configure(
     padding=5,
     foreground="#133E87",
 )
+# Allow dynamic changes to the style
 style.map(
     "Rounded.TButton",
     background=[("active", "#CBDCEB")],
@@ -148,13 +155,12 @@ filter_combobox = ttk.Combobox(
         "K-Means Clustering",
         "Periodic noise Filter",
     ],
-    state="readonly",
+    state="readonly", 
     width=18,
     justify="center",
     style="Rounded.TButton",
     font=("calibri", 10, "bold"),
-)  # Make combobox read-only
-
+)
 filter_combobox.set("Select Filter ▼")
 filter_combobox.grid(row=0, column=2, pady=5)
 
@@ -169,8 +175,7 @@ periodic_types = ttk.Combobox(
     justify="center",
     style="Rounded.TButton",
     font=("calibri", 10, "bold"),
-)  # Make combobox read-only
-
+)
 periodic_types.set("Periodic Type ▼")
 periodic_types.grid(row=1, column=2, pady=5)
 periodic_types.grid_remove()  # Hide initially
@@ -183,10 +188,7 @@ kmeans_apply_button = ttk.Button(
     style="Rounded.TButton",
 )
 kmeans_apply_button.grid(row=1, column=2, pady=5)
-
-# Initially hide the kmeans content
-kmeans_apply_button.grid_remove()
-
+kmeans_apply_button.grid_remove()  # Hide initially
 
 def show_periodic_types(event):
     if filter_combobox.get() == "Periodic noise Filter":
@@ -194,24 +196,16 @@ def show_periodic_types(event):
     else:
         periodic_types.grid_remove()
 
-
 def show_kmeans_view(event):
     if filter_combobox.get() == "K-Means Clustering":
         kmeans_apply_button.grid()
     else:
         kmeans_apply_button.grid_remove()
 
-
 filter_combobox.bind(
     "<<ComboboxSelected>>", lambda e: (show_periodic_types(e), show_kmeans_view(e))
 )
 
-
-def apply_kmeans():
-    try:
-        kmeans_app = KMeansClusteringApp()
-    except Exception as e:
-        messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
 
 # Run App
