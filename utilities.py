@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import cv2
 import os
 import cv2 as cv
